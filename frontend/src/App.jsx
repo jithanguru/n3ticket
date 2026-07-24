@@ -14,8 +14,18 @@ import { AuthModal } from './components/AuthModal';
 import { NotificationModal } from './components/NotificationModal';
 import { ProfileModal } from './components/ProfileModal';
 import { MessengerModal } from './components/MessengerModal';
+import { MobileBottomNav } from './components/MobileBottomNav';
 
 import { Ticket, Film, Bus, Plane, Trophy, Activity, Search } from 'lucide-react';
+
+const CATEGORY_CAROUSEL = [
+  { id: 'all', label: 'All', icon: Ticket },
+  { id: 'Movie', label: 'Movies', icon: Film },
+  { id: 'Bus', label: 'Bus Routes', icon: Bus },
+  { id: 'Flight', label: 'Flights', icon: Plane },
+  { id: 'Cricket', label: 'Cricket', icon: Trophy },
+  { id: 'Football', label: 'Football', icon: Activity }
+];
 
 function MarketplaceContent() {
   const {
@@ -23,6 +33,8 @@ function MarketplaceContent() {
     loading,
     searchQuery,
     setSearchQuery,
+    selectedCategory,
+    setSelectedCategory,
     activeTicket,
     setActiveTicket,
     editingTicket,
@@ -37,6 +49,7 @@ function MarketplaceContent() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isMessengerOpen, setIsMessengerOpen] = useState(false);
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   const unreadCount = realNotifications.filter(n => !n.read).length;
 
@@ -70,36 +83,54 @@ function MarketplaceContent() {
           Universal Peer-to-Peer <span>Ticket Trading Exchange</span>
         </h1>
         <p className="hero-subtitle">
-          Buy & sell unused tickets from anywhere. Instant escrow verification for Movies, Bus lines, Flight seats, Cricket matches, and Football tournaments.
+          Buy & sell unused tickets safely. Escrow verification for Movies, Bus routes, Flight seats, Cricket matches, and Football tournaments.
         </p>
 
-        {/* Cohesive Minimalist Category Badges (Unified Color Scheme) */}
+        {/* Minimalist Monochrome Category Badges */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1.25rem', fontSize: '0.82rem' }}>
-          <div className="hero-category-badge">
+          <div className="hero-category-badge" onClick={() => setSelectedCategory('Movie')}>
             <Film size={14} color="var(--text-muted)" /> Movie Tickets
           </div>
-          <div className="hero-category-badge">
+          <div className="hero-category-badge" onClick={() => setSelectedCategory('Bus')}>
             <Bus size={14} color="var(--text-muted)" /> Bus Routes
           </div>
-          <div className="hero-category-badge">
+          <div className="hero-category-badge" onClick={() => setSelectedCategory('Flight')}>
             <Plane size={14} color="var(--text-muted)" /> Flights
           </div>
-          <div className="hero-category-badge">
+          <div className="hero-category-badge" onClick={() => setSelectedCategory('Cricket')}>
             <Trophy size={14} color="var(--text-muted)" /> Cricket Matches
           </div>
-          <div className="hero-category-badge">
+          <div className="hero-category-badge" onClick={() => setSelectedCategory('Football')}>
             <Activity size={14} color="var(--text-muted)" /> Football Tickets
           </div>
         </div>
       </section>
 
-      {/* Two-Column Marketplace Layout (Left Panel Sidebar + Right Main Grid) */}
+      {/* Two-Column Marketplace Layout */}
       <div className="marketplace-layout">
         {/* Left Sidebar Filter Panel */}
         <SidebarFilterPanel />
 
         {/* Right Main Grid Area */}
         <div className="main-grid-content">
+          {/* Mobile Quick Category Carousel Bar */}
+          <div className="mobile-category-carousel">
+            {CATEGORY_CAROUSEL.map((cat) => {
+              const Icon = cat.icon;
+              const isActive = selectedCategory.toLowerCase() === cat.id.toLowerCase();
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`mobile-cat-pill ${isActive ? 'active' : ''}`}
+                >
+                  <Icon size={14} />
+                  <span>{cat.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
           {/* Top Search & Results Header */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'var(--bg-card)', padding: '0.75rem 1rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)' }}>
             <div className="search-input-group" style={{ flex: 1, padding: '0.5rem 0.85rem' }}>
@@ -113,7 +144,7 @@ function MarketplaceContent() {
             </div>
 
             <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
-              Showing <strong style={{ color: '#fff' }}>{tickets.length}</strong> listings
+              Showing <strong style={{ color: '#fff' }}>{tickets.length}</strong> available
             </div>
           </div>
 
@@ -149,8 +180,18 @@ function MarketplaceContent() {
         </div>
       </div>
 
+      {/* Mobile Native Bottom Navigation Bar */}
+      <MobileBottomNav
+        onOpenSellModal={() => setIsSellOpen(true)}
+        onOpenProfile={() => setIsProfileOpen(true)}
+        onOpenMessenger={() => setIsMessengerOpen(true)}
+        onOpenAuthModal={() => setIsAuthOpen(true)}
+        onToggleFilter={() => setMobileFilterOpen(!mobileFilterOpen)}
+        unreadCount={unreadCount}
+      />
+
       {/* Footer */}
-      <footer style={{ borderTop: '1px solid var(--border-subtle)', padding: '2rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+      <footer style={{ borderTop: '1px solid var(--border-subtle)', padding: '2rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '60px' }}>
         <p>© 2026 TicketX Exchange. Verified Peer-to-Peer Ticket Resale Marketplace. All Rights Reserved.</p>
       </footer>
 

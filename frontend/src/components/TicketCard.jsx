@@ -26,11 +26,12 @@ export function TicketCard({ ticket, onSelectTicket, onQuickBuy }) {
 
   return (
     <div className={`ticket-card ${isSold ? 'sold-out' : ''}`}>
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative' }} onClick={() => onSelectTicket(ticket)}>
         <img
           src={ticket.proofImage || 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=600&q=80'}
           alt={ticket.title}
           className="ticket-card-image"
+          loading="lazy"
         />
         
         <div className="ticket-badge-category">
@@ -53,7 +54,7 @@ export function TicketCard({ ticket, onSelectTicket, onQuickBuy }) {
             alignItems: 'center',
             justifyContent: 'center',
             fontWeight: 700,
-            fontSize: '1.1rem',
+            fontSize: '1rem',
             color: 'var(--accent-rose)',
             letterSpacing: '1px',
             textTransform: 'uppercase'
@@ -65,7 +66,9 @@ export function TicketCard({ ticket, onSelectTicket, onQuickBuy }) {
 
       <div className="ticket-body">
         <div>
-          <h3 className="ticket-title">{ticket.title}</h3>
+          <h3 className="ticket-title" onClick={() => onSelectTicket(ticket)} style={{ cursor: 'pointer' }}>
+            {ticket.title}
+          </h3>
 
           <div className="ticket-meta">
             <div className="meta-row">

@@ -642,20 +642,115 @@ body {
   }
 }
 
-.mobile-only-inline {
+/* Mobile Bottom Navigation Bar & Mobile Category Carousel */
+.mobile-bottom-nav {
+  display: none;
+}
+
+.mobile-category-carousel {
   display: none;
 }
 
 @media (max-width: 767px) {
-  .mobile-only-inline {
-    display: inline-flex;
-    align-items: center;
+  .mobile-category-carousel {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.25rem 0.1rem 0.5rem 0.1rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-  .sidebar-body {
+  .mobile-category-carousel::-webkit-scrollbar {
     display: none;
   }
-  .sidebar-body.open-mobile {
-    display: block;
+
+  .mobile-cat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .mobile-cat-pill.active {
+    background: #18181b;
+    border-color: var(--border-active);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 62px;
+    background: rgba(18, 18, 21, 0.95);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border-active);
+    z-index: 900;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 0.5rem;
+  }
+
+  .mobile-nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 1;
+    padding: 0.3rem 0;
+  }
+
+  .mobile-nav-btn.active, .mobile-nav-btn:hover {
+    color: #fff;
+  }
+
+  .mobile-nav-btn.primary-action {
+    position: relative;
+    top: -10px;
+  }
+
+  .mobile-sell-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(255,255,255,0.25);
+  }
+
+  .mobile-unread-badge {
+    position: absolute;
+    top: 2px;
+    right: 22%;
+    background: var(--accent-rose);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
