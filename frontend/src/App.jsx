@@ -16,16 +16,7 @@ import { ProfileModal } from './components/ProfileModal';
 import { MessengerModal } from './components/MessengerModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 
-import { Ticket, Film, Bus, Plane, Trophy, Activity, Search } from 'lucide-react';
-
-const CATEGORY_CAROUSEL = [
-  { id: 'all', label: 'All', icon: Ticket },
-  { id: 'Movie', label: 'Movies', icon: Film },
-  { id: 'Bus', label: 'Bus Routes', icon: Bus },
-  { id: 'Flight', label: 'Flights', icon: Plane },
-  { id: 'Cricket', label: 'Cricket', icon: Trophy },
-  { id: 'Football', label: 'Football', icon: Activity }
-];
+import { Ticket, Search } from 'lucide-react';
 
 function MarketplaceContent() {
   const {
@@ -33,8 +24,6 @@ function MarketplaceContent() {
     loading,
     searchQuery,
     setSearchQuery,
-    selectedCategory,
-    setSelectedCategory,
     activeTicket,
     setActiveTicket,
     editingTicket,
@@ -94,24 +83,6 @@ function MarketplaceContent() {
 
         {/* Right Main Grid Area */}
         <div className="main-grid-content">
-          {/* Mobile Quick Category Carousel Bar */}
-          <div className="mobile-category-carousel">
-            {CATEGORY_CAROUSEL.map((cat) => {
-              const Icon = cat.icon;
-              const isActive = selectedCategory.toLowerCase() === cat.id.toLowerCase();
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`mobile-cat-pill ${isActive ? 'active' : ''}`}
-                >
-                  <Icon size={14} />
-                  <span>{cat.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
           {/* Top Search & Results Header */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'var(--bg-card)', padding: '0.75rem 1rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)' }}>
             <div className="search-input-group" style={{ flex: 1, padding: '0.5rem 0.85rem' }}>
