@@ -1,0 +1,30 @@
+services:
+  # Backend Express REST API & Socket.io Web Service
+  - type: web
+    name: ticketx-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        value: ticketx_secret_jwt_key_2026
+      - key: SUPABASE_URL
+        value: https://cmoyzgkjntqtejkjgsyd.supabase.co
+      - key: SUPABASE_ANON_KEY
+        sync: false
+
+  # Frontend Vite React Static Site
+  - type: web
+    name: ticketx-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_SUPABASE_URL
+        value: https://cmoyzgkjntqtejkjgsyd.supabase.co
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false

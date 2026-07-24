@@ -1,0 +1,2 @@
+# Caddy server and Keycloak have been completely removed as requested.
+# The application runs directly with Node.js Express backend and Supabase Postgres database.
