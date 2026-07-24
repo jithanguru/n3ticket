@@ -3,5 +3,14 @@
   "tickets": [],
   "orders": [],
   "bids": [],
-  "chats": []
+  "chats": [
+    {
+      "id": "msg-1784916792551",
+      "roomId": "room-t-013256",
+      "senderId": "f0835256-8b47-4db8-98ea-883172850625",
+      "senderName": "test",
+      "text": "hello",
+      "time": "11:43 PM"
+    }
+  ]
 }

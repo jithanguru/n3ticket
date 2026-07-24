@@ -85,25 +85,6 @@ function MarketplaceContent() {
         <p className="hero-subtitle">
           Buy & sell unused tickets safely. Escrow verification for Movies, Bus routes, Flight seats, Cricket matches, and Football tournaments.
         </p>
-
-        {/* Minimalist Monochrome Category Badges */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1.25rem', fontSize: '0.82rem' }}>
-          <div className="hero-category-badge" onClick={() => setSelectedCategory('Movie')}>
-            <Film size={14} color="var(--text-muted)" /> Movie Tickets
-          </div>
-          <div className="hero-category-badge" onClick={() => setSelectedCategory('Bus')}>
-            <Bus size={14} color="var(--text-muted)" /> Bus Routes
-          </div>
-          <div className="hero-category-badge" onClick={() => setSelectedCategory('Flight')}>
-            <Plane size={14} color="var(--text-muted)" /> Flights
-          </div>
-          <div className="hero-category-badge" onClick={() => setSelectedCategory('Cricket')}>
-            <Trophy size={14} color="var(--text-muted)" /> Cricket Matches
-          </div>
-          <div className="hero-category-badge" onClick={() => setSelectedCategory('Football')}>
-            <Activity size={14} color="var(--text-muted)" /> Football Tickets
-          </div>
-        </div>
       </section>
 
       {/* Two-Column Marketplace Layout */}
