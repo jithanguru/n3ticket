@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Ticket, PlusCircle, ShieldCheck, LogOut, Lock, Bell, User, ChevronDown, Wallet, MessageSquare, Send } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { useSocket } from '../context/SocketContext';
 
 export function Navbar({ onOpenSellModal, onOpenAuthModal, onOpenDashboard, onOpenProfile, onOpenNotifications, onOpenMessenger, unreadCount }) {
   const { user, logout } = useAuth();
@@ -21,11 +20,13 @@ export function Navbar({ onOpenSellModal, onOpenAuthModal, onOpenDashboard, onOp
 
   return (
     <header className="navbar">
-      <div className="brand-logo">
+      <div className="brand-logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
         <div className="brand-icon">
-          <Ticket color="#fff" size={20} />
+          <Ticket color="#fff" size={18} />
         </div>
-        <span>Ticket<span style={{ color: 'var(--primary)' }}>X</span></span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', lineHeight: 1 }}>
+          Ticket<span style={{ color: 'var(--primary)' }}>X</span>
+        </span>
       </div>
 
       <div className="nav-actions">
@@ -34,7 +35,7 @@ export function Navbar({ onOpenSellModal, onOpenAuthModal, onOpenDashboard, onOp
           <button
             className="btn btn-secondary btn-sm"
             onClick={onOpenMessenger}
-            style={{ padding: '0.5rem 0.75rem' }}
+            style={{ padding: '0.45rem 0.75rem', height: '36px', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
             title="Messages"
           >
             <Send size={15} color="var(--text-muted)" />
@@ -46,18 +47,18 @@ export function Navbar({ onOpenSellModal, onOpenAuthModal, onOpenDashboard, onOp
         <button
           className="btn btn-secondary btn-sm"
           onClick={onOpenNotifications}
-          style={{ position: 'relative', padding: '0.5rem 0.75rem' }}
+          style={{ position: 'relative', padding: '0.45rem 0.65rem', height: '36px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
           title="Notifications"
         >
           <Bell size={16} color={unreadCount > 0 ? 'var(--primary)' : 'var(--text-muted)'} />
           {unreadCount > 0 && (
             <span style={{
               position: 'absolute',
-              top: '-3px',
-              right: '-3px',
+              top: '-2px',
+              right: '-2px',
               background: 'var(--accent-rose)',
               color: '#fff',
-              fontSize: '0.68rem',
+              fontSize: '0.65rem',
               fontWeight: 700,
               width: '16px',
               height: '16px',
@@ -71,22 +72,48 @@ export function Navbar({ onOpenSellModal, onOpenAuthModal, onOpenDashboard, onOp
           )}
         </button>
 
-        <button className="btn btn-primary" onClick={onOpenSellModal}>
+        <button className="btn btn-primary" onClick={onOpenSellModal} style={{ height: '36px', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
           <PlusCircle size={16} />
           <span>Sell Ticket</span>
         </button>
 
         {user ? (
           <div style={{ position: 'relative' }} ref={dropdownRef}>
-            {/* Profile Avatar Trigger Button */}
+            {/* Perfectly Aligned Profile Avatar & Name Button */}
             <button
               className="btn btn-secondary"
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              style={{ padding: '0.35rem 0.75rem' }}
+              style={{
+                height: '36px',
+                padding: '0.35rem 0.65rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.55rem',
+                borderRadius: 'var(--radius-md)'
+              }}
             >
-              <img src={user.avatar} alt={user.name} className="avatar-sm" />
-              <span>{user.name.split(' ')[0]}</span>
-              <ChevronDown size={14} color="var(--text-muted)" />
+              <img
+                src={user.avatar}
+                alt={user.name}
+                style={{
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  flexShrink: 0,
+                  display: 'block'
+                }}
+              />
+              <span style={{
+                fontSize: '0.85rem',
+                fontWeight: 500,
+                color: 'var(--text-main)',
+                lineHeight: 1,
+                display: 'inline-block'
+              }}>
+                {user.name.split(' ')[0]}
+              </span>
+              <ChevronDown size={14} color="var(--text-muted)" style={{ flexShrink: 0, marginLeft: '0.1rem' }} />
             </button>
 
             {/* Profile Dropdown Menu */}
@@ -107,8 +134,8 @@ export function Navbar({ onOpenSellModal, onOpenAuthModal, onOpenDashboard, onOp
                 gap: '0.2rem'
               }}>
                 <div style={{ padding: '0.5rem 0.75rem', borderBottom: '1px solid var(--border-subtle)', marginBottom: '0.2rem' }}>
-                  <div style={{ fontWeight: 600, color: '#fff', fontSize: '0.88rem' }}>{user.name}</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user.email}</div>
+                  <div style={{ fontWeight: 600, color: '#fff', fontSize: '0.88rem', lineHeight: 1.2 }}>{user.name}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', overflow: 'hidden', textOverflow: 'ellipsis', marginTop: '0.15rem' }}>{user.email}</div>
                 </div>
 
                 <button
@@ -162,7 +189,7 @@ export function Navbar({ onOpenSellModal, onOpenAuthModal, onOpenDashboard, onOp
             )}
           </div>
         ) : (
-          <button className="btn btn-secondary" onClick={onOpenAuthModal}>
+          <button className="btn btn-secondary" onClick={onOpenAuthModal} style={{ height: '36px', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
             <Lock size={15} color="var(--text-muted)" />
             <span>Sign In / Sign Up</span>
           </button>
