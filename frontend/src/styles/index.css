@@ -642,13 +642,43 @@ body {
   }
 }
 
-/* Mobile Bottom Navigation Bar & Mobile Category Carousel */
-.mobile-bottom-nav {
-  display: none;
+/* Messenger Modal Responsive Layout */
+.messenger-sidebar {
+  width: 300px;
+  border-right: 1px solid var(--border-subtle);
+  background: #09090b;
+  display: flex;
+  flex-direction: column;
 }
 
-.mobile-category-carousel {
-  display: none;
+.messenger-thread {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #121215;
+}
+
+.desktop-only-inline {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .desktop-only-inline {
+    display: none !important;
+  }
+
+  .messenger-sidebar {
+    width: 100%;
+    border-right: none;
+  }
+
+  .messenger-thread {
+    width: 100%;
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
 }
 
 @media (max-width: 767px) {

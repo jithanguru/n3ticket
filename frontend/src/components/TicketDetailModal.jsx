@@ -55,31 +55,30 @@ export function TicketDetailModal({ ticket, onClose }) {
 
   return (
     <div className="modal-backdrop">
-      <div className="modal-card" style={{ maxWidth: '720px' }}>
+      <div className="modal-card" style={{ maxWidth: '680px' }}>
         <div className="modal-header">
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem', flexWrap: 'wrap' }}>
               <span className="ticket-badge-category" style={{ position: 'static' }}>{ticket.category}</span>
-              <span style={{ fontSize: '0.8rem', color: 'var(--accent-emerald)', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+              <span style={{ fontSize: '0.78rem', color: 'var(--accent-emerald)', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
                 <ShieldCheck size={14} /> Guaranteed Authentic
               </span>
             </div>
-            <h2 className="modal-title">{ticket.title}</h2>
+            <h2 className="modal-title" style={{ fontSize: '1.15rem' }}>{ticket.title}</h2>
           </div>
-          <button className="close-btn" onClick={onClose}><X size={22} /></button>
+          <button className="close-btn" onClick={onClose}><X size={20} /></button>
         </div>
 
         {purchaseSuccess ? (
           <div className="qr-stub">
-            <CheckCircle size={44} color="var(--accent-emerald)" style={{ margin: '0 auto 0.5rem auto' }} />
-            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: '#fff' }}>Ticket Purchased!</h3>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>
+            <CheckCircle size={40} color="var(--accent-emerald)" style={{ margin: '0 auto 0.5rem auto' }} />
+            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', color: '#fff' }}>Ticket Purchased!</h3>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
               Your digital transfer pass is ready. Show this QR code at the venue or transfer via {ticket.sourcePlatform}.
             </p>
 
             <div className="qr-box">
-              {/* SVG QR Code Simulation */}
-              <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+              <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
                 <rect width="100" height="100" fill="#fff" />
                 <path d="M10 10h30v30H10zM60 10h30v30H60zM10 60h30v30H10z" fill="#000" />
                 <path d="M20 20h10v10H20zM70 20h10v10H70zM20 70h10v10H20z" fill="#fff" />
@@ -89,109 +88,115 @@ export function TicketDetailModal({ ticket, onClose }) {
               </svg>
             </div>
 
-            <div style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: 'var(--accent-cyan)' }}>
+            <div style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: 'var(--accent-cyan)' }}>
               PASS CODE: {purchaseSuccess.qrCode}
             </div>
 
-            <button className="btn btn-primary" style={{ marginTop: '1.25rem' }} onClick={onClose}>
+            <button className="btn btn-primary" style={{ marginTop: '1rem', width: '100%', justifyContent: 'center' }} onClick={onClose}>
               Done & View My Wallet
             </button>
           </div>
         ) : (
           <>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+            {/* Top Detail Section (Auto-stacks on mobile) */}
+            <div className="modal-detail-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
               <div>
                 <img
-                  src={ticket.proofImage}
+                  src={ticket.proofImage || 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=600&q=80'}
                   alt={ticket.title}
-                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-glass)' }}
+                  style={{ width: '100%', maxHeight: '180px', objectFit: 'cover', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}
                 />
               </div>
 
-              <div style={{ display: 'flex', flexContent: 'space-between', flexDirection: 'column', gap: '0.75rem' }}>
-                <div className="meta-row">
-                  <Calendar size={16} color="var(--primary)" />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', justifyContent: 'center' }}>
+                <div className="meta-row" style={{ fontSize: '0.82rem' }}>
+                  <Calendar size={15} color="var(--primary)" />
                   <span><strong>Date:</strong> {ticket.eventDate} ({ticket.eventTime})</span>
                 </div>
-                <div className="meta-row">
-                  <MapPin size={16} color="var(--accent-cyan)" />
+                <div className="meta-row" style={{ fontSize: '0.82rem' }}>
+                  <MapPin size={15} color="var(--accent-cyan)" />
                   <span><strong>Location:</strong> {ticket.venueOrRoute}</span>
                 </div>
-                <div className="meta-row">
-                  <Tag size={16} color="var(--accent-emerald)" />
+                <div className="meta-row" style={{ fontSize: '0.82rem' }}>
+                  <Tag size={15} color="var(--accent-emerald)" />
                   <span><strong>Seat / Section:</strong> {ticket.seatDetails}</span>
                 </div>
-                <div className="meta-row">
-                  <ExternalLink size={16} color="var(--text-muted)" />
+                <div className="meta-row" style={{ fontSize: '0.82rem' }}>
+                  <ExternalLink size={15} color="var(--text-muted)" />
                   <span><strong>Source:</strong> {ticket.sourcePlatform}</span>
                 </div>
 
-                <div style={{ background: 'rgba(255,255,255,0.04)', padding: '0.75rem', borderRadius: 'var(--radius-md)', marginTop: '0.5rem' }}>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Listed by Seller:</div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.25rem' }}>
-                    <span style={{ fontWeight: 700, color: '#fff' }}>{ticket.sellerName}</span>
-                    <span style={{ color: 'var(--accent-amber)', fontSize: '0.85rem', fontWeight: 700 }}>
-                      ⭐ {ticket.sellerScore}% Trust Rating
+                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.6rem 0.75rem', borderRadius: 'var(--radius-md)', marginTop: '0.35rem', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Listed by Seller:</div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.15rem' }}>
+                    <span style={{ fontWeight: 600, color: '#fff', fontSize: '0.85rem' }}>{ticket.sellerName}</span>
+                    <span style={{ color: 'var(--accent-amber)', fontSize: '0.8rem', fontWeight: 600 }}>
+                      ⭐ {ticket.sellerScore}% Score
                     </span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: 'var(--radius-md)', marginBottom: '1.5rem', border: '1px solid var(--border-glass)' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>Seller Notes:</div>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontStyle: 'italic' }}>
-                "{ticket.notes || 'Verified authentic ticket listing on TicketX.'}"
-              </p>
-            </div>
+            {ticket.notes && (
+              <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.85rem', borderRadius: 'var(--radius-md)', marginBottom: '1.25rem', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>Seller Instructions:</div>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-main)', fontStyle: 'italic', margin: 0 }}>
+                  "{ticket.notes}"
+                </p>
+              </div>
+            )}
 
-            {/* Action Tabs */}
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--border-glass)', paddingBottom: '0.75rem' }}>
+            {/* Action Tabs Bar (Flex wraps cleanly on mobile) */}
+            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.65rem' }}>
               <button
                 className={`btn btn-sm ${activeTab === 'buy' ? 'btn-primary' : 'btn-secondary'}`}
                 onClick={() => setActiveTab('buy')}
+                style={{ flex: '1 1 auto', justifyContent: 'center' }}
               >
-                <Zap size={14} /> Instant Buy (${ticket.price})
+                <Zap size={13} /> Buy (${ticket.price})
               </button>
               <button
                 className={`btn btn-sm ${activeTab === 'bid' ? 'btn-accent' : 'btn-secondary'}`}
                 onClick={() => setActiveTab('bid')}
+                style={{ flex: '1 1 auto', justifyContent: 'center' }}
               >
-                <DollarSign size={14} /> Make Offer / Bid
+                <DollarSign size={13} /> Make Offer
               </button>
               <button
                 className={`btn btn-sm ${activeTab === 'chat' ? 'btn-emerald' : 'btn-secondary'}`}
                 onClick={() => setActiveTab('chat')}
+                style={{ flex: '1 1 auto', justifyContent: 'center' }}
               >
-                <MessageSquare size={14} /> Live Seller Chat
+                <MessageSquare size={13} /> Seller Chat
               </button>
             </div>
 
             {/* Tab: Buy */}
             {activeTab === 'buy' && (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(99, 102, 241, 0.1)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--primary-glow)' }}>
+              <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'rgba(255, 255, 255, 0.03)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-active)' }}>
                 <div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Final Total Price:</div>
-                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Final Price:</div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', fontWeight: 800, color: '#fff' }}>
                     ${ticket.price}
                   </div>
                 </div>
 
                 {!isSold && !isOwner && (
-                  <button className="btn btn-primary" onClick={handleBuy} disabled={purchasing}>
-                    <Zap size={18} />
-                    <span>{purchasing ? 'Processing Escrow...' : 'Confirm & Purchase Now'}</span>
+                  <button className="btn btn-primary" onClick={handleBuy} disabled={purchasing} style={{ padding: '0.65rem 1.25rem' }}>
+                    <Zap size={16} />
+                    <span>{purchasing ? 'Processing...' : 'Confirm & Purchase'}</span>
                   </button>
                 )}
 
                 {isOwner && (
-                  <div style={{ color: 'var(--accent-amber)', fontSize: '0.9rem', fontWeight: 600 }}>
-                    This is your active ticket listing.
+                  <div style={{ color: 'var(--accent-amber)', fontSize: '0.85rem', fontWeight: 600 }}>
+                    This is your active listing.
                   </div>
                 )}
 
                 {isSold && (
-                  <div style={{ color: 'var(--accent-rose)', fontWeight: 700 }}>
+                  <div style={{ color: 'var(--accent-rose)', fontWeight: 700, fontSize: '0.85rem' }}>
                     This ticket has been claimed.
                   </div>
                 )}
@@ -215,12 +220,12 @@ export function TicketDetailModal({ ticket, onClose }) {
                   <input
                     type="text"
                     className="form-input"
-                    placeholder="e.g. Can meet in person or transfer instantly via app."
+                    placeholder="e.g. Can meet in person or transfer instantly."
                     value={bidNote}
                     onChange={(e) => setBidNote(e.target.value)}
                   />
                 </div>
-                <button type="submit" className="btn btn-accent" style={{ width: '100%' }}>
+                <button type="submit" className="btn btn-accent" style={{ width: '100%', justifyContent: 'center' }}>
                   Submit Price Offer
                 </button>
               </form>
@@ -229,14 +234,14 @@ export function TicketDetailModal({ ticket, onClose }) {
             {/* Tab: Real-Time Live Chat */}
             {activeTab === 'chat' && (
               <div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
-                  Socket.io Encrypted Chat Room with Seller: <strong>{ticket.sellerName}</strong>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>
+                  Encrypted Live Room with Seller: <strong>{ticket.sellerName}</strong>
                 </div>
 
-                <div className="chat-box">
+                <div className="chat-box" style={{ height: '140px' }}>
                   {chatMessages.length === 0 ? (
-                    <div style={{ color: 'var(--text-dim)', fontSize: '0.85rem', textAlign: 'center', marginTop: '3rem' }}>
-                      No messages yet. Ask the seller questions about seat view or barcode transfer!
+                    <div style={{ color: 'var(--text-dim)', fontSize: '0.82rem', textAlign: 'center', marginTop: '2.5rem' }}>
+                      No messages yet. Ask seller questions about seating or transfer!
                     </div>
                   ) : (
                     chatMessages.map((msg) => (
@@ -244,23 +249,23 @@ export function TicketDetailModal({ ticket, onClose }) {
                         key={msg.id}
                         className={`chat-message ${msg.senderId === user?.id ? 'self' : 'other'}`}
                       >
-                        <div style={{ fontSize: '0.72rem', opacity: 0.8 }}>{msg.senderName} ({msg.time})</div>
+                        <div style={{ fontSize: '0.7rem', opacity: 0.8 }}>{msg.senderName} ({msg.time})</div>
                         <div>{msg.text}</div>
                       </div>
                     ))
                   )}
                 </div>
 
-                <form onSubmit={handleSendChat} style={{ display: 'flex', gap: '0.5rem' }}>
+                <form onSubmit={handleSendChat} style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
                   <input
                     type="text"
                     className="form-input"
-                    placeholder="Type a message to the seller..."
+                    placeholder="Type a message..."
                     value={chatInput}
                     onChange={(e) => setChatInput(e.target.value)}
                   />
                   <button type="submit" className="btn btn-primary btn-sm">
-                    <Send size={16} />
+                    <Send size={15} />
                   </button>
                 </form>
               </div>
