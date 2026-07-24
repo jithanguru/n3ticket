@@ -1,6 +1,7 @@
 /* ==========================================================================
    TicketX Ultra-Minimalist CSS Design System
    Sleek, Clean Monochrome & Refined Typography Palette
+   Fully Responsive for Mobile, Tablet, Laptop, and Desktop Screens
    ========================================================================== */
 
 :root {
@@ -112,6 +113,7 @@ body {
   transition: all 0.15s ease;
   border: 1px solid transparent;
   outline: none;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -172,6 +174,7 @@ body {
   height: 6px;
   background-color: var(--accent-emerald);
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 /* Minimal Hero Section */
@@ -183,7 +186,7 @@ body {
 }
 
 .hero-title {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.2;
@@ -200,6 +203,7 @@ body {
   color: var(--text-muted);
   max-width: 650px;
   margin: 0 auto 1.25rem auto;
+  line-height: 1.5;
 }
 
 .hero-category-badge {
@@ -340,7 +344,7 @@ body {
 /* Minimal Ticket Cards */
 .ticket-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.25rem;
 }
 
@@ -456,13 +460,13 @@ body {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
+  padding: 1rem;
 }
 
 .modal-card {
@@ -471,7 +475,7 @@ body {
   border-radius: var(--radius-xl);
   width: 100%;
   max-width: 580px;
-  max-height: 90vh;
+  max-height: 92vh;
   overflow-y: auto;
   position: relative;
   padding: 1.5rem;
@@ -487,7 +491,7 @@ body {
 }
 
 .modal-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
@@ -497,6 +501,7 @@ body {
   color: var(--text-muted);
   cursor: pointer;
   font-size: 1.1rem;
+  padding: 0.25rem;
 }
 .close-btn:hover { color: #fff; }
 
@@ -528,91 +533,138 @@ body {
   border-color: var(--border-active);
 }
 
-.user-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0.3rem 0.75rem;
-  border-radius: 16px;
-  border: 1px solid var(--border-subtle);
-}
-
-.avatar-sm {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.chat-box {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 0.85rem;
-  height: 160px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  margin-bottom: 0.85rem;
-}
-
-.chat-message {
-  padding: 0.45rem 0.75rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.82rem;
-  max-width: 80%;
-}
-.chat-message.self {
-  background: #27272a;
-  color: #fff;
-  align-self: flex-end;
-}
-.chat-message.other {
-  background: rgba(255, 255, 255, 0.08);
-  align-self: flex-start;
-}
-
-.qr-stub {
-  background: #18181b;
-  border: 1px dashed var(--border-active);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.qr-box {
-  width: 130px;
-  height: 130px;
-  background: #fff;
-  margin: 0.85rem auto;
-  padding: 0.65rem;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .dropdown-item:hover {
   background: rgba(255, 255, 255, 0.08) !important;
   color: #fff !important;
 }
 
-/* Responsive Rules */
-@media (max-width: 900px) {
+/* ==========================================================================
+   COMPREHENSIVE RESPONSIVE BREAKPOINTS (Mobile, Tablet, Laptop, Desktop)
+   ========================================================================== */
+
+/* Laptop & Large Desktop (1024px+) */
+@media (min-width: 1024px) {
   .marketplace-layout {
-    grid-template-columns: 1fr;
-    padding: 0 1rem 3rem 1rem;
+    grid-template-columns: 270px 1fr;
   }
-  .sidebar-panel {
-    position: static;
+}
+
+/* Tablet & Medium Screens (768px - 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .marketplace-layout {
+    grid-template-columns: 240px 1fr;
+    gap: 1.25rem;
+    padding: 0 1.25rem 3rem 1.25rem;
   }
   .hero-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
+  .ticket-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+/* Mobile & Small Screens (< 767px) */
+@media (max-width: 767px) {
   .navbar {
     padding: 0.75rem 1rem;
+  }
+  .brand-logo span span {
+    display: inline;
+  }
+  .brand-logo {
+    font-size: 1.1rem;
+  }
+
+  .nav-actions {
+    gap: 0.4rem;
+  }
+
+  .nav-actions .btn {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .nav-actions .btn span {
+    display: none; /* Hide button text labels on mobile for clean icon navigation */
+  }
+
+  .ticker-bar {
+    padding: 0.35rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .hero-section {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-category-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .marketplace-layout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 0 1rem 2.5rem 1rem;
+  }
+
+  .sidebar-panel {
+    position: static;
+    padding: 1rem;
+  }
+
+  .ticket-grid {
+    grid-template-columns: 1fr; /* Single column ticket cards on mobile */
+    gap: 1rem;
+  }
+
+  .modal-card {
+    max-width: 95vw;
+    padding: 1.15rem;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Switch 2-column form grids to single column on mobile */
+  form div[style*="grid-template-columns"],
+  form div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.mobile-only-inline {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-only-inline {
+    display: inline-flex;
+    align-items: center;
+  }
+  .sidebar-body {
+    display: none;
+  }
+  .sidebar-body.open-mobile {
+    display: block;
+  }
+}
+
+/* Extra Small Phones (< 400px) */
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 1.3rem;
+  }
+  .price-box .resale-price {
+    font-size: 1.1rem;
   }
 }
