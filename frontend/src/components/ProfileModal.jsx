@@ -44,74 +44,75 @@ export function ProfileModal({ isOpen, onClose }) {
 
   return (
     <div className="modal-backdrop">
-      <div className="modal-card" style={{ maxWidth: '640px' }}>
+      <div className="modal-card modal-profile">
         <div className="modal-header">
           <div>
             <h2 className="modal-title">My Account Profile</h2>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
               Real member details and ticket trading reputation.
             </p>
           </div>
-          <button className="close-btn" onClick={onClose}><X size={20} /></button>
+          <button className="close-btn" onClick={onClose}><X size={18} /></button>
         </div>
 
         {savedMessage && (
-          <div style={{ padding: '0.75rem', borderRadius: 'var(--radius-md)', background: 'rgba(52,211,153,0.15)', border: '1px solid var(--accent-emerald)', color: '#fff', fontSize: '0.85rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <CheckCircle2 size={18} color="var(--accent-emerald)" />
+          <div style={{ padding: '0.65rem', borderRadius: 'var(--radius-md)', background: 'rgba(52,211,153,0.15)', border: '1px solid var(--accent-emerald)', color: '#fff', fontSize: '0.8rem', marginBottom: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <CheckCircle2 size={16} color="var(--accent-emerald)" />
             <span>Profile details updated successfully!</span>
           </div>
         )}
 
-        {/* User Card Header showing Actual Real User Data */}
-        <div style={{ background: 'var(--bg-card)', padding: '1.5rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-          <img src={user.avatar} alt={user.name} style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--border-active)' }} />
+        {/* User Card Header */}
+        <div style={{ background: 'var(--bg-card)', padding: '1rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <img src={user.avatar} alt={user.name} style={{ width: '60px', height: '60px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--border-active)', flexShrink: 0 }} />
 
-          <div style={{ flex: 1 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <h3 style={{ fontSize: '1.35rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
+          <div style={{ flex: 1, minWidth: '180px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
+              <h3 style={{ fontSize: '1.1rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
                 {user.name}
-                <ShieldCheck size={20} color="var(--accent-emerald)" />
+                <ShieldCheck size={16} color="var(--accent-emerald)" />
               </h3>
 
               <button
                 className="btn btn-secondary btn-sm"
                 onClick={() => setIsEditing(!isEditing)}
+                style={{ fontSize: '0.75rem', padding: '0.25rem 0.6rem' }}
               >
-                <Edit2 size={14} />
+                <Edit2 size={12} />
                 <span>{isEditing ? 'Cancel' : 'Edit Profile'}</span>
               </button>
             </div>
 
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '0.25rem', marginBottom: '0.5rem' }}>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.15rem', marginBottom: '0.4rem', wordBreak: 'break-all' }}>
               {user.email}
             </p>
 
-            <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
-              <span style={{ background: 'rgba(52,211,153,0.12)', color: 'var(--accent-emerald)', fontSize: '0.75rem', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                <Award size={12} /> {user.trustScore || 100}% Trust Rating
+            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              <span style={{ background: 'rgba(52,211,153,0.12)', color: 'var(--accent-emerald)', fontSize: '0.7rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '12px' }}>
+                <Award size={11} style={{ display: 'inline', marginRight: '3px' }} /> {user.trustScore || 100}% Trust
               </span>
-              <span style={{ background: 'rgba(56,189,248,0.12)', color: 'var(--accent-cyan)', fontSize: '0.75rem', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: '12px' }}>
-                Verified Member
+              <span style={{ background: 'rgba(56,189,248,0.12)', color: 'var(--accent-cyan)', fontSize: '0.7rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '12px' }}>
+                Verified
               </span>
             </div>
           </div>
         </div>
 
         {/* Real User Statistics */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: 'var(--radius-md)', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
-            <div style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--primary)' }}>{myListings.length}</div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Listed Tickets</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', marginBottom: '1rem' }}>
+          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.65rem 0.4rem', borderRadius: 'var(--radius-md)', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--primary)' }}>{myListings.length}</div>
+            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Listed</div>
           </div>
 
-          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: 'var(--radius-md)', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
-            <div style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent-emerald)' }}>{purchasedOrders.length}</div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Purchased Tickets</div>
+          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.65rem 0.4rem', borderRadius: 'var(--radius-md)', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--accent-emerald)' }}>{purchasedOrders.length}</div>
+            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Purchased</div>
           </div>
 
-          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: 'var(--radius-md)', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
-            <div style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent-amber)' }}>{user.trustScore || 100}%</div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Seller Score</div>
+          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.65rem 0.4rem', borderRadius: 'var(--radius-md)', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--accent-amber)' }}>{user.trustScore || 100}%</div>
+            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Score</div>
           </div>
         </div>
 
@@ -155,36 +156,36 @@ export function ProfileModal({ isOpen, onClose }) {
               <label className="form-label">Bio & Member Notes</label>
               <textarea
                 className="form-textarea"
-                rows={3}
+                rows={2}
                 placeholder="Tell buyers/sellers about yourself..."
                 value={formData.bio}
                 onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
               />
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1.25rem' }}>
-              <button type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>Cancel</button>
-              <button type="submit" className="btn btn-primary">
-                <Save size={15} /> Save Changes
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '1rem' }}>
+              <button type="button" className="btn btn-secondary btn-sm" onClick={() => setIsEditing(false)}>Cancel</button>
+              <button type="submit" className="btn btn-primary btn-sm">
+                <Save size={13} /> Save Changes
               </button>
             </div>
           </form>
         ) : (
-          <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}>
-            <div className="meta-row" style={{ marginBottom: '0.5rem' }}>
-              <Mail size={16} color="var(--primary)" />
-              <span><strong>Email:</strong> {user.email}</span>
+          <div style={{ background: 'rgba(0,0,0,0.2)', padding: '0.85rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', fontSize: '0.82rem' }}>
+            <div className="meta-row" style={{ marginBottom: '0.4rem' }}>
+              <Mail size={14} color="var(--primary)" />
+              <span style={{ wordBreak: 'break-all' }}><strong>Email:</strong> {user.email}</span>
             </div>
-            <div className="meta-row" style={{ marginBottom: '0.75rem' }}>
-              <Phone size={16} color="var(--accent-cyan)" />
+            <div className="meta-row" style={{ marginBottom: '0.5rem' }}>
+              <Phone size={14} color="var(--accent-cyan)" />
               <span><strong>Phone:</strong> {formData.phone || <em style={{ color: 'var(--text-dim)' }}>No phone number added yet</em>}</span>
             </div>
             {formData.bio ? (
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontStyle: 'italic', margin: 0 }}>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontStyle: 'italic', margin: 0 }}>
                 "{formData.bio}"
               </p>
             ) : (
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-dim)', fontStyle: 'italic', margin: 0 }}>
+              <p style={{ fontSize: '0.78rem', color: 'var(--text-dim)', fontStyle: 'italic', margin: 0 }}>
                 No bio added yet. Click "Edit Profile" to write a bio.
               </p>
             )}
